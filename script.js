@@ -22,29 +22,37 @@ let holdBtn = document.getElementById('hold');
 
 let dice = document.querySelector('.dice');
 
-let scores, currentScore, activePlayer, playing;
+
 
 // creating a New Game function
+let scores, currentScore, activePlayer, playing;
+
 let newGame = function () {
   // setting all default score to 0
   scores = [0, 0];
   currentScore = 0;
   activePlayer = 0;
-  playing = true;
+  
   player0Score.innerText = 0;
   player1Score.innerText = 0;
   player0CurrentScore.innerText = 0;
   player1CurrentScore.innerText = 0;
 
+  //allows buttons functionality to work
+  playing = true;
+
+    //change default active player to player one
   player1.classList.remove('player--active');
   player0.classList.add('player--active');
 
   //make dice not visible
   dice.classList.add('hidden');
 
+    // remove the winner class from active player to start new game
   player0.classList.remove('player--winner');
   player1.classList.remove('player--winner');
 
+    //set players name to default
   document.querySelector('#name--0').textContent = 'Player 1';
   document.querySelector('#name--1').textContent = 'Player 2';
 };
@@ -106,13 +114,18 @@ holdBtn.addEventListener('click', function () {
     document.getElementById(`score--${activePlayer}`).innerText =
       scores[activePlayer];
 
+      //check if active player's score is >= 100 if true active player wins
     if (scores[activePlayer] >= 100) {
+      //stop playing and disactivate buttons
       playing = false;
 
+
+      //add winner class to the active player
       document
         .querySelector(`.player--${activePlayer}`)
         .classList.add('player--winner');
 
+          // change active player's name content to WINNER
       document.querySelector(`#name--${activePlayer}`).textContent = 'winner';
     }
 
